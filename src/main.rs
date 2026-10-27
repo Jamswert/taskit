@@ -1,4 +1,5 @@
 mod cli;
+mod store;
 
 use cli::parse;
 
