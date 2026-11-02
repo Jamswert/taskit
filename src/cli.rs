@@ -38,7 +38,15 @@ pub fn parse(args: &[String]) -> Result<Command, ParseError> {
     };
 
     match command.as_str() {
-        "add" => Err(ParseError::NotImplemented("add")),
+        "add" => {
+            let mut parts = rest.iter();
+            let Some(text) = parts.next() else {
+                return Err(ParseError::MissingArgument("task"));
+            };
+            Ok(Command::Add {
+                task: text.to_string(),
+            })
+        }
         "ls" | "list" => Err(ParseError::NotImplemented("list")),
         "help" => Err(ParseError::NotImplemented("help")),
         "done" => Err(ParseError::NotImplemented("done")),
